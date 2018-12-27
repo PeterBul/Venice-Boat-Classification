@@ -14,8 +14,8 @@ from keras.preprocessing import image
 from scipy.misc import imread, imresize
 from sklearn.metrics import classification_report, confusion_matrix
 
-TRAIN = False
-EPOCHS = 10
+TRAIN = True
+EPOCHS = 50
 BATCH_SIZE = 32
 IMG_HEIGHT = 240
 IMG_WIDTH = 800
@@ -29,7 +29,8 @@ CLASS_WEIGHT = {0: 1.,
                 2: 2.}
 
 def main():
-    boats = os.listdir(TRAIN_DATA)
+    boats = list(filter(lambda f: os.path.isdir(os.path.join(TRAIN_DATA, f)),
+                        os.listdir(TRAIN_DATA)))
     model = prepare_model(boats)
     if TRAIN:
         train_generator, validation_generator = prepare_generators()

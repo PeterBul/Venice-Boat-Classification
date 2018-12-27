@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
 
-TRAIN = True
+TRAIN = False
 # image dimensions
 IMG_HEIGHT, IMG_WIDTH =  240, 800
 # Change number of epochs from time available. One epoch takes aprox. 1 minute
@@ -21,7 +21,7 @@ TRAIN_DATA = r'data/generators/train'
 VALID_DATA = r'data/generators/valid'
 TEST_DATA = r'data/generators/test/'
 SAVE_WEIGHTS_PATH = 'output/vbc/vbc_5.h5'
-LOAD_WEIGHTS_PATH = 'output/vbc/third_try.h5'
+LOAD_WEIGHTS_PATH = 'output/vbc/vbc_5.h5'
 
 # Class weights have to correspond to the number of categories. The weights are
 # used to handle unbalanced datasets. The numbers should be approximately the
@@ -31,7 +31,8 @@ CLASS_WEIGHT = {0: 1.,
                 2: 2.}
 
 def main():
-    boats = os.listdir(TRAIN_DATA)
+    boats = list(filter(lambda f: os.path.isdir(os.path.join(TRAIN_DATA, f)),
+                        os.listdir(TRAIN_DATA)))
     model = prepare_model(boats)
     if TRAIN:
         train_generator, validation_generator = prepare_generators()
@@ -39,7 +40,7 @@ def main():
     else:
         model.load_weights(LOAD_WEIGHTS_PATH)
     model.summary()
-    test_model(model)
+    test_model(model, boats)
 
 
 def prepare_model(boats):
@@ -73,7 +74,7 @@ def prepare_model(boats):
 
     # Flatten array to a one dimensional array for use in a fully connected layer
     model.add(Flatten())
-    # Fully connected layer with 64 nodes for detectic higher level features
+    # Fully connected layer with 1024 nodes for detectic higher level features
     model.add(Dense(64, activation='relu'))
     # Add dropout layer to avoid overfitting
     model.add(Dropout(0.5))
@@ -141,7 +142,7 @@ def fit_model(model, train_generator, validation_generator):
     return model
 
 
-def test_model(model):
+def test_model(model, boats):
     test_datagen = ImageDataGenerator(rescale=1./255)
     test_generator = test_datagen.flow_from_directory(TEST_DATA,
                                                             target_size=(IMG_HEIGHT, IMG_WIDTH),
@@ -155,7 +156,7 @@ def test_model(model):
     print('Confusion Matrix')
     print(confusion_matrix(test_generator.classes, y_pred))
     print('Classification Report')
-    print(classification_report(test_generator.classes, y_pred, target_names=BOATS))
+    print(classification_report(test_generator.classes, y_pred, target_names=boats))
 
 
 if __name__ == '__main__':
