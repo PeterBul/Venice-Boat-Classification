@@ -79,6 +79,11 @@ data/
       image_k.jpg
 ```
 
+### Running the files
+
+There are two primary files. vbc.py and mobilenet_vbc.py. They both run on the same folder structure. Vbc is a CNN network built from scratch, mobilenet_vbc.py uses retraining of MobileNet.
+
+To tweak the excecution of the files, the constants in CAPS LOCK should be inspected before running. The number of epochs greatly affects the run time.
 
 ## Built With
 
