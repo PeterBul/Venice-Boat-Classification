@@ -87,8 +87,8 @@ To tweak the excecution of the files, the constants in CAPS LOCK should be inspe
 
 ## Built With
 
-* [TensorFlow](https://www.tensorflow.org/api_docs/python/tf) - The machine learning frame work used
-* [Keras](https://keras.io/) - Machine learning framework from tensorflow
+* [TensorFlow](https://www.tensorflow.org/api_docs/python/tf) - The machine learning framework used.
+* [Keras](https://keras.io/) - Machine learning framework from TensorFlow.
 
 
 ## Authors
