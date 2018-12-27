@@ -22,8 +22,8 @@ IMG_WIDTH = 800
 TRAIN_DATA = r'data/generators/train'
 VALID_DATA = r'data/generators/valid'
 TEST_DATA = r'data/generators/test/'
-SAVE_WEIGHTS_PATH = r'/output/MobileNet_7.h5'
-LOAD_WEIGHTS_PATH = r'/output/MobileNet_7.h5'
+SAVE_WEIGHTS_PATH = r'/output/mobilenet/MobileNet_7.h5'
+LOAD_WEIGHTS_PATH = r'/output/mobilenet/MobileNet_7.h5'
 CLASS_WEIGHT = {0: 1.,
                 1: 1.,
                 2: 2.}

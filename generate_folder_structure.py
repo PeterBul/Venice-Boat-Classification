@@ -3,7 +3,7 @@ import math
 from shutil import copyfile
 
 TRAIN_DATA = 'data/sc5'
-TEST_FOLDER = 'data/sc5-test'
+TEST_DATA = 'data/sc5-test'
 GROUND_TRUTH = 'data/sc5-test/ground_truth.txt'
 TRAIN_SHARE = 0.8
 
@@ -51,7 +51,7 @@ def make_test_folder():
         ground_truth[file_name] = label
 
     for file, label in ground_truth.items():
-        old_file_path = os.path.join(TEST_FOLDER, file)
+        old_file_path = os.path.join(TEST_DATA, file)
         new_category_path = os.path.join(new_test_folder, label)
         new_file_path = os.path.join(new_category_path, file)
         if os.path.isdir(new_category_path):
